@@ -1,13 +1,16 @@
-/*
-*
-*
-* */
 package iti_intake44.pk1;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import java.time.Duration;
+
+
+/**
+ * This class created by
+ *
+ * @author Merna Hesham
+ */
 
 public class TestcaseDay3 {
 
