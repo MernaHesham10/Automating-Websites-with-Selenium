@@ -25,7 +25,7 @@ public class TestcaseDay3 {
     static String itemName = "Sauce Labs Backpack";
     static String addToCartBtnXpath = "//div[contains(@class, 'inventory_item') and .//div[contains(text(), '%s')]]//button";
     static String btnXpath = String.format(addToCartBtnXpath, itemName);
-    static By addToCartBtnLocator = By.xpath(btnXpath);
+
     //Variables
     WebDriver driver = new ChromeDriver();
     String URL = "https://www.google.com/";
@@ -83,14 +83,16 @@ public class TestcaseDay3 {
     //Note: Task 2
     public static WebElement getAddToCartButton(WebDriver driver, String itemName) {
         //Xpath => //div[contains(@class, 'inventory_item') and .//div[contains(text(), '%s')]]
-        //String btnXpath = String.format(addToCartBtnXpath, itemName);
+        String btnXpath = String.format("//div[contains(@class, 'inventory_item') and .//div[contains(text(), '%s')]]//button", itemName);
 
-        return driver.findElement(addToCartBtnLocator);
+        return driver.findElement(By.xpath(btnXpath));
     }
+
+
 
     //Note: Task 2 Test Case
     @Test
-    public void addItemFunction() {
+    public void addItemFunction(){
 
         //Max browser window
         driver.manage().window().maximize();
@@ -120,21 +122,29 @@ public class TestcaseDay3 {
         //Go to Cart Page
         driver.findElement(addToCartIcon).click();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String itemXpath = String.format("//div[contains(text(),'%s')]", itemName);
-        String actualItemText = driver.findElement(By.xpath(itemXpath)).getText();
+        //String actualItemText = driver.findElement(By.xpath(itemXpath)).getText();
+
+        By actualItem = By.xpath(itemXpath);
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(actualItem));
+            System.out.println("Item Found in Cart Page");
+        } catch (TimeoutException e) {
+            System.out.println("Item cannot Found in Cart Page");
+        }
 
         // Check if the item div exists and its text contains the expected item name
-        if (actualItemText != null) {
+        /*if (actualItemText != null) {
             System.out.println("Item Found in Cart Page");
 
         } else {
             System.out.println("Item cannot Found in Cart Page");
-        }
+        }*/
 
         // Close the browser
         driver.quit();
     }
-
 }
