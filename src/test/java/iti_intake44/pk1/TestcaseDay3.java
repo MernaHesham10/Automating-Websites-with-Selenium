@@ -129,11 +129,14 @@ public class TestcaseDay3 {
         //String actualItemText = driver.findElement(By.xpath(itemXpath)).getText();
 
         By actualItem = By.xpath(itemXpath);
+
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(actualItem));
+            Assert.assertTrue(driver.findElement(actualItem).isDisplayed(), "Item not found in Cart Page");
             System.out.println("Item Found in Cart Page");
         } catch (TimeoutException e) {
             System.out.println("Item cannot Found in Cart Page");
+            Assert.fail("Item not found in Cart Page", e);
         }
 
         // Check if the item div exists and its text contains the expected item name
@@ -147,4 +150,5 @@ public class TestcaseDay3 {
         // Close the browser
         driver.quit();
     }
+
 }
