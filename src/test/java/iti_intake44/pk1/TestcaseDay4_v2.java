@@ -2,15 +2,11 @@ package iti_intake44.pk1;
 
 import org.example.DocumentPagePOM;
 import org.example.HomePagePOM;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -24,8 +20,8 @@ public class TestcaseDay4_v2 {
     //Note: Run fn Before all TC start their work
     // BeforeMethod => Before each TC ===========> 7aG
 
-    @BeforeClass
-    public void beforeTestClass() {
+    @BeforeMethod
+    public void beforeTestcase() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
@@ -40,7 +36,7 @@ public class TestcaseDay4_v2 {
         homePage.goToHomePage();
         homePage.clickGetPaid();
 
-        try {
+        /*try {
             String price = documentPage.getPrice();
 
             String priceExpectedValue = "149";
@@ -49,14 +45,20 @@ public class TestcaseDay4_v2 {
 
         } catch (TimeoutException e) {
             System.out.println("Price Value cannot found on the page");
-        }
+        }*/
+
+        String price = documentPage.getPrice();
+
+        String priceExpectedValue = "149";
+
+        Assert.assertTrue(price.contains(priceExpectedValue), "Price Value cannot found on the page");
 
     }
 
     //Note: Run fn after all TC finish their work
     // AfterMethod => After each TC ===========> 7aG
-    @AfterClass
-    public void afterTestClass() {
+    @AfterMethod
+    public void afterTestcase() {
         if (driver != null) {
             driver.quit();
         }

@@ -5,9 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -36,8 +34,8 @@ public class TestcaseDay4_v1 {
 
     //Note: Run fn Before all TC start their work
     // BeforeMethod => Before each TC ===========> 7aG
-    @BeforeClass
-    public void beforeTestClass() {
+    @BeforeMethod
+    public void beforeTestcase() {
         driver = new ChromeDriver();
 
         //Max browser window
@@ -61,7 +59,7 @@ public class TestcaseDay4_v1 {
         //getPaidWE.click(); => Not Work ???
         getPaidWE.sendKeys(Keys.ENTER);
 
-        try {
+        /*try {
             String priceActualValue = wait.until(ExpectedConditions.visibilityOfElementLocated(priceLocator)).getText();
 
             String priceExpectedValue = "149";
@@ -70,13 +68,18 @@ public class TestcaseDay4_v1 {
 
         } catch (TimeoutException e) {
             System.out.println("Price Value cannot found on the page");
-        }
+        }*/
+
+        String priceActualValue = wait.until(ExpectedConditions.visibilityOfElementLocated(priceLocator)).getText();
+        String priceExpectedValue = "149";
+        Assert.assertTrue(priceActualValue.contains(priceExpectedValue), "Price Value cannot be found on the page");
+
     }
 
     //Note: Run fn after all TC finish their work
     // AfterMethod => After each TC ===========> 7aG
-    @AfterClass
-    public void afterTestClass() {
+    @AfterMethod
+    public void afterTestcase() {
 
         // Close the browser
         if (driver != null) {

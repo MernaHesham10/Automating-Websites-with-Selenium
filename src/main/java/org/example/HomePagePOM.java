@@ -35,11 +35,13 @@ public class HomePagePOM {
         driver.navigate().to(websiteURL);
     }
 
-    public void clickGetPaid() {
+    public DocumentPagePOM clickGetPaid() {
         WebElement getPaidWE = driver.findElement(getPaidLocator);
         getPaidWE.sendKeys(Keys.ENTER);
 
         new WebDriverWait(driver, Duration.ofSeconds(30));
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'right panel-heading--price')]")));
+
+        return new DocumentPagePOM(driver);
     }
 }
