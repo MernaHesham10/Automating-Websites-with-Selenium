@@ -70,9 +70,21 @@ public class TestcaseDay4_v1 {
             System.out.println("Price Value cannot found on the page");
         }*/
 
-        String priceActualValue = wait.until(ExpectedConditions.visibilityOfElementLocated(priceLocator)).getText();
+
+        try {
+            String priceActualValue = wait.until(ExpectedConditions.visibilityOfElementLocated(priceLocator)).getText();
+            String priceExpectedValue = "149";
+
+            Assert.assertTrue(priceActualValue.contains(priceExpectedValue), "Price Value cannot be found on the page");
+
+        } catch (TimeoutException e) {
+            Assert.fail("Price Value cannot found on the page");
+        }
+
+        /*String priceActualValue = wait.until(ExpectedConditions.visibilityOfElementLocated(priceLocator)).getText();
         String priceExpectedValue = "149";
         Assert.assertTrue(priceActualValue.contains(priceExpectedValue), "Price Value cannot be found on the page");
+        */
 
     }
 
