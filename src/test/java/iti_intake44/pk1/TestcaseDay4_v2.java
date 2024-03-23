@@ -2,6 +2,7 @@ package iti_intake44.pk1;
 
 import org.example.DocumentPagePOM;
 import org.example.HomePagePOM;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,11 +48,23 @@ public class TestcaseDay4_v2 {
             System.out.println("Price Value cannot found on the page");
         }*/
 
-        String price = documentPage.getPrice();
+        try {
+            String price = documentPage.getPrice();
+
+            String priceExpectedValue = "149";
+
+            Assert.assertTrue(price.contains(priceExpectedValue));
+
+        } catch (TimeoutException e) {
+            Assert.fail("Price Value cannot found on the page");
+
+        }
+
+        /*String price = documentPage.getPrice();
 
         String priceExpectedValue = "149";
 
-        Assert.assertTrue(price.contains(priceExpectedValue), "Price Value cannot found on the page");
+        Assert.assertTrue(price.contains(priceExpectedValue), "Price Value cannot found on the page");*/
 
     }
 
